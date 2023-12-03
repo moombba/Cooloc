@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:afgf_front/models/task/task.dart';
 import 'package:afgf_front/providers/task_provider.dart';
@@ -116,7 +115,7 @@ class TaskCard extends StatelessWidget {
                       ref.read(taskListDisplayProvider.notifier).endTask(index);
                     },
                   )
-                : SizedBox()),IconButton(
+                : const SizedBox()),IconButton(
                     icon: const Icon(Icons.delete),
                     onPressed: () {
                       ref

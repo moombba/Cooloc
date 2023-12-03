@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
 
 
   FloatingActionButton getFab(BuildContext context) {
-    final List<FloatingActionButton> _fabs = [
+    final List<FloatingActionButton> fabs = [
       FloatingActionButton(
         onPressed: () {
           showBottomPopup(context);
@@ -51,14 +51,14 @@ class _MainPageState extends State<MainPage> {
       FloatingActionButton(onPressed: () {}, child: const Icon(Icons.search)),
     ];
 
-    return _fabs[_currentIndex];
+    return fabs[_currentIndex];
   }
 
   final List<Widget> _children = [
     const TasksPage(),
-    ViewPage('Page 2'),
-    ViewPage('Page 3'),
-    ViewPage('Page 4'),
+    const ViewPage('Page 2'),
+    const ViewPage('Page 3'),
+    const ViewPage('Page 4'),
   ];
 
   void onTabTapped(int index) {
@@ -116,7 +116,7 @@ class _MainPageState extends State<MainPage> {
 class ViewPage extends StatelessWidget {
   final String title;
 
-  ViewPage(this.title, {super.key});
+  const ViewPage(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
