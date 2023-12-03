@@ -104,14 +104,11 @@ class _PopUpContentState extends State<PopUpContent> {
                 onPressed: widget._textFieldController.text.isNotEmpty &&
                         (monthValue != 0 || dayValue != 0)
                     ? () {
-                        var task = Task(
-                            name: widget._textFieldController.text,
-                            weight: _sliderValue.toInt(),
-                            recurrence: Duration.zero,
-                            isDone: false,);
                         ref
                             .read(taskListDisplayProvider.notifier)
-                            .addTask(task);
+                            .addTask(name: widget._textFieldController.text,
+                            weight: _sliderValue.toInt(),
+                            recurrence: Duration.zero,);
                         Navigator.of(context).pop();
                         widget._textFieldController.text = "";
                       }

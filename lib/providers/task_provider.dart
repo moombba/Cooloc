@@ -4,22 +4,32 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part "task_provider.g.dart";
 
-final taskProvider = StateProvider<List<Task>>((ref) => [Task(name: "name", weight: 1, recurrence: Duration.zero, isDone: false)]);
-
-
+final taskProvider = StateProvider<List<Task>>((ref) =>
+    [Task(name: "name", weight: 1, recurrence: Duration.zero, isDone: false)]);
 
 @riverpod
 class TaskListDisplay extends _$TaskListDisplay {
   @override
-  List<Task> build() => [Task(name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
+  List<Task> build() =>
+      [Task(name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
 
-  void addTask(Task task) {
-    print("add task : list = $state");
+  String _formatTaskName(String name) => "${name[0].toUpperCase} + ${name.substring(1)}";
+  void addTask({
+    required String name,
+    required int weight,
+    required Duration recurrence,
+  }) {
+    var task = Task(
+      name: _formatTaskName(name),
+      weight: weight,
+      recurrence: recurrence,
+      isDone: false,
+    );
     state = [...state, task];
   }
 
   void removeTask(int index) {
-    print (index);
+    print(index);
     List<Task> newState = [...state];
     newState.removeAt(index);
     state = newState;
@@ -27,7 +37,7 @@ class TaskListDisplay extends _$TaskListDisplay {
 
   void endTask(int index) {
     List<Task> newState = [...state];
-    newState[index].isDone = true;
+    newState[index] = newState[index].copyWith(isDone: true);
     state = newState;
   }
 

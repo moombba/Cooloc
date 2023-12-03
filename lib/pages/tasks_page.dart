@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:afgf_front/models/task/task.dart';
 import 'package:afgf_front/providers/task_provider.dart';
 import 'package:afgf_front/theme/colors.dart';
@@ -21,9 +23,7 @@ class TasksPage extends ConsumerWidget {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
-          return PopUpContent(
-              items: items,
-              dayItems: dayItems);
+          return PopUpContent(items: items, dayItems: dayItems);
         });
   }
 
@@ -31,24 +31,24 @@ class TasksPage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     var list = ref.watch(taskListDisplayProvider);
 
-    return  SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.05),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: ref.read(taskListDisplayProvider).length,
-                      itemBuilder: (context, index) {
-                        return TaskCard(list: list, index: index, ref: ref);
-                      }),
-                )
-              ],
-            ),
-          ),
-        );
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.05),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  itemCount: ref.read(taskListDisplayProvider).length,
+                  itemBuilder: (context, index) {
+                    return TaskCard(list: list, index: index, ref: ref);
+                  }),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -58,13 +58,11 @@ class TaskCard extends StatelessWidget {
     required this.list,
     required this.index,
     required this.ref,
-    isDone,
   });
 
   final List<Task> list;
   final int index;
   final WidgetRef ref;
-  final bool isDone = false;
 
   @override
   Widget build(BuildContext context) {
@@ -74,44 +72,50 @@ class TaskCard extends StatelessWidget {
       ),
       child: ListTile(
         shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-          tileColor: isDone ? Colors.grey : secondaryColor,
-          title: Text(list[index].name, style:  TextStyle(fontWeight: FontWeight.bold, decoration: isDone ? TextDecoration.lineThrough : null),),
-          subtitle: SizedBox(
-            height:
-                MediaQuery.of(context).size.height * 0.02,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                for (var i = 0; i < list[index].weight; i++)
-                  Icon(
-                    Icons.adjust_sharp,
-                    size:
-                        MediaQuery.of(context).size.width *
-                            0.035,
-                  ),
-              ],
-            ),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        tileColor: list[index].isDone ? Colors.grey : secondaryColor,
+        title: Text(
+          list[index].name,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              decoration:
+                  list[index].isDone ? TextDecoration.lineThrough : null),
+        ),
+        subtitle: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.02,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              for (var i = 0; i < list[index].weight; i++)
+                Icon(
+                  Icons.adjust_sharp,
+                  size: MediaQuery.of(context).size.width * 0.035,
+                ),
+            ],
           ),
-          trailing: !isDone ?
-           IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: () {
-              ref
-                  .read(taskListDisplayProvider.notifier)
-                  .removeTask(index);
-            },
-          )
-          //  IconButton(
-          //   icon: const Icon(Icons.delete),
-          //   onPressed: () {
-          //     ref
-          //         .read(taskListDisplayProvider.notifier)
-          //         .removeTask(index);
-          //   },
-          // )
-           : null,),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            (!list[index].isDone
+                ? IconButton(
+                    icon: const Icon(Icons.check),
+                    onPressed: () {
+                      ref.read(taskListDisplayProvider.notifier).endTask(index);
+                    },
+                  )
+                : SizedBox()),IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      ref
+                          .read(taskListDisplayProvider.notifier)
+                          .removeTask(index);
+                    },
+                  ),
+          ],
+        ),
+      ),
     );
   }
 }
