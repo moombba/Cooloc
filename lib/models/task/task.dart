@@ -9,6 +9,7 @@ class Task with _$Task {
   const Task._();
 
   factory Task({
+    required String id,
     required String name,
     required int weight,
     required Duration recurrence,

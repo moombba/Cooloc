@@ -5,13 +5,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part "task_provider.g.dart";
 
 final taskProvider = StateProvider<List<Task>>((ref) =>
-    [Task(name: "name", weight: 1, recurrence: Duration.zero, isDone: false)]);
+    [Task(id: DateTime.now().toString(),name: "name", weight: 1, recurrence: Duration.zero, isDone: false)]);
 
 @riverpod
 class TaskListDisplay extends _$TaskListDisplay {
   @override
   List<Task> build() =>
-      [Task(name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
+      [Task(id: DateTime.now().toString(),name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
 
   String _formatTaskName(String name) => "${name[0].toUpperCase()}${name.substring(1)}";
   void addTask({
@@ -20,6 +20,7 @@ class TaskListDisplay extends _$TaskListDisplay {
     required Duration recurrence,
   }) {
     var task = Task(
+      id: DateTime.now().toString(),
       name: _formatTaskName(name),
       weight: weight,
       recurrence: recurrence,
@@ -28,9 +29,9 @@ class TaskListDisplay extends _$TaskListDisplay {
     state = [...state, task];
   }
 
-  void removeTask(int index) {
+  void removeTask(String id) {
     List<Task> newState = [...state];
-    newState.removeAt(index);
+    newState.removeWhere((element) => element.id == id);
     state = newState;
   }
 

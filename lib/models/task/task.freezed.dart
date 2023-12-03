@@ -20,6 +20,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Task {
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get weight => throw _privateConstructorUsedError;
   Duration get recurrence => throw _privateConstructorUsedError;
@@ -35,7 +36,8 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
-  $Res call({String name, int weight, Duration recurrence, bool isDone});
+  $Res call(
+      {String id, String name, int weight, Duration recurrence, bool isDone});
 }
 
 /// @nodoc
@@ -51,12 +53,17 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? weight = null,
     Object? recurrence = null,
     Object? isDone = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -84,7 +91,8 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$TaskImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, int weight, Duration recurrence, bool isDone});
+  $Res call(
+      {String id, String name, int weight, Duration recurrence, bool isDone});
 }
 
 /// @nodoc
@@ -97,12 +105,17 @@ class __$$TaskImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? weight = null,
     Object? recurrence = null,
     Object? isDone = null,
   }) {
     return _then(_$TaskImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -127,7 +140,8 @@ class __$$TaskImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TaskImpl extends _Task {
   _$TaskImpl(
-      {required this.name,
+      {required this.id,
+      required this.name,
       required this.weight,
       required this.recurrence,
       required this.isDone})
@@ -136,6 +150,8 @@ class _$TaskImpl extends _Task {
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskImplFromJson(json);
 
+  @override
+  final String id;
   @override
   final String name;
   @override
@@ -147,7 +163,7 @@ class _$TaskImpl extends _Task {
 
   @override
   String toString() {
-    return 'Task(name: $name, weight: $weight, recurrence: $recurrence, isDone: $isDone)';
+    return 'Task(id: $id, name: $name, weight: $weight, recurrence: $recurrence, isDone: $isDone)';
   }
 
   @override
@@ -155,6 +171,7 @@ class _$TaskImpl extends _Task {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.weight, weight) || other.weight == weight) &&
             (identical(other.recurrence, recurrence) ||
@@ -165,7 +182,7 @@ class _$TaskImpl extends _Task {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, weight, recurrence, isDone);
+      Object.hash(runtimeType, id, name, weight, recurrence, isDone);
 
   @JsonKey(ignore: true)
   @override
@@ -183,7 +200,8 @@ class _$TaskImpl extends _Task {
 
 abstract class _Task extends Task {
   factory _Task(
-      {required final String name,
+      {required final String id,
+      required final String name,
       required final int weight,
       required final Duration recurrence,
       required final bool isDone}) = _$TaskImpl;
@@ -191,6 +209,8 @@ abstract class _Task extends Task {
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
+  @override
+  String get id;
   @override
   String get name;
   @override

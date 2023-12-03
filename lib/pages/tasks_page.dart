@@ -31,6 +31,10 @@ class TasksPage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     var list = ref.watch(taskListDisplayProvider);
 
+     var doneList = list.where((element) => element.isDone).toList(); 
+     var toDoList = list.where((element) => !element.isDone).toList(); 
+    
+    print(list);
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Padding(
@@ -40,9 +44,16 @@ class TasksPage extends ConsumerWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                  itemCount: ref.read(taskListDisplayProvider).length,
+                  itemCount: toDoList.length,
                   itemBuilder: (context, index) {
-                    return TaskCard(list: list, index: index, ref: ref);
+                    return TaskCard(list: toDoList, index: index, ref: ref);
+                  }),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: list.where((element) => element.isDone).length,
+                  itemBuilder: (context, index) {
+                    return TaskCard(list: doneList, index: index, ref: ref);
                   }),
             )
           ],
@@ -110,7 +121,7 @@ class TaskCard extends StatelessWidget {
                     onPressed: () {
                       ref
                           .read(taskListDisplayProvider.notifier)
-                          .removeTask(index);
+                          .removeTask(list[index].id);
                     },
                   ),
           ],
