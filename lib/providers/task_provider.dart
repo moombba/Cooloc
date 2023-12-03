@@ -13,7 +13,7 @@ class TaskListDisplay extends _$TaskListDisplay {
   List<Task> build() =>
       [Task(name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
 
-  String _formatTaskName(String name) => "${name[0].toUpperCase} + ${name.substring(1)}";
+  String _formatTaskName(String name) => "${name[0].toUpperCase()}${name.substring(1)}";
   void addTask({
     required String name,
     required int weight,
@@ -29,7 +29,6 @@ class TaskListDisplay extends _$TaskListDisplay {
   }
 
   void removeTask(int index) {
-    print(index);
     List<Task> newState = [...state];
     newState.removeAt(index);
     state = newState;

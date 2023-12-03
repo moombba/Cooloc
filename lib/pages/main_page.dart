@@ -1,4 +1,6 @@
 import 'package:afgf_front/pages/tasks_page.dart';
+import 'package:afgf_front/theme/colors.dart';
+import 'package:afgf_front/widgets/drawer.dart';
 import 'package:afgf_front/widgets/pop_up_content.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -68,6 +70,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     var navigationBar = SalomonBottomBar(
+      backgroundColor: backgroundColor,
       currentIndex: _currentIndex,
       onTap: (i) => setState(() => _currentIndex = i),
       items: [
@@ -102,8 +105,8 @@ class _MainPageState extends State<MainPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Main Page'),
         ),
+        drawer: const MyDrawer(),
         body: _children[_currentIndex],
         floatingActionButton: getFab(context),
         bottomNavigationBar: navigationBar);
