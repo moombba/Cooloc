@@ -12,22 +12,38 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     Person user = ref.watch(userProfileProvider);
     return Scaffold(
-      body:  Center(child: Column(
+      body:  Center(child: Stack(
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-          const CircleAvatar(
-            radius: 60,
-            child: ClipOval(
-            child: Image(image: AssetImage("assets/jazz_harring.jpeg"),
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.11,
+                left: MediaQuery.of(context).size.width * 0.35,
+                child: const CircleAvatar(
+                  radius: 70,
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: ClipOval(
+                    child: Image(image: AssetImage("assets/jazz_harring.jpeg"),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-          Text(user.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-          Text(user.score.toString() , style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: primaryColor)),
+          Column(
+            children: [
+              Container(height: MediaQuery.of(context).size.height * 0.2, color: primaryColor.withOpacity(0.2),),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+              Text(user.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+              Text(user.score.toString() , style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: primaryColor)),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.025),
+              Row(children: [
+                SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                Text("Mes badges", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+              ]),
 
 
-        ])),
+            ]),
+        ],
+      )),
     );
   }
 }
