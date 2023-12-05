@@ -1,11 +1,8 @@
 import 'package:afgf_front/models/task/task.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part "task_provider.g.dart";
 
-final taskProvider = StateProvider<List<Task>>((ref) =>
-    [Task(id: DateTime.now().toString(),name: "name", weight: 1, recurrence: Duration.zero, isDone: false)]);
 
 @riverpod
 class TaskListDisplay extends _$TaskListDisplay {
@@ -14,6 +11,7 @@ class TaskListDisplay extends _$TaskListDisplay {
       [Task(id: DateTime.now().toString(),name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
 
   String _formatTaskName(String name) => "${name[0].toUpperCase()}${name.substring(1)}";
+
   void addTask({
     required String name,
     required int weight,

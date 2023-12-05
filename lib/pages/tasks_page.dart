@@ -1,4 +1,3 @@
-
 import 'package:afgf_front/models/task/task.dart';
 import 'package:afgf_front/providers/task_provider.dart';
 import 'package:afgf_front/theme/colors.dart';
@@ -30,9 +29,9 @@ class TasksPage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     var list = ref.watch(taskListDisplayProvider);
 
-     var doneList = list.where((element) => element.isDone).toList(); 
-     var toDoList = list.where((element) => !element.isDone).toList(); 
-    
+    var doneList = list.where((element) => element.isDone).toList();
+    var toDoList = list.where((element) => !element.isDone).toList();
+
     print(list);
     return SizedBox(
       height: MediaQuery.of(context).size.height,
@@ -109,23 +108,56 @@ class TaskCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             (!list[index].isDone
-                ? IconButton(
-                    icon: const Icon(Icons.check),
-                    onPressed: () {
-                      ref.read(taskListDisplayProvider.notifier).endTask(index);
-                    },
-                  )
-                : const SizedBox()),IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () {
-                      ref
-                          .read(taskListDisplayProvider.notifier)
-                          .removeTask(list[index].id);
-                    },
-                  ),
+                ? EndTaskButton(ref: ref, index: index)
+                : const SizedBox()),
+            RemoveTaskButton(ref: ref, list: list, index: index),
           ],
         ),
       ),
+    );
+  }
+}
+
+class RemoveTaskButton extends StatelessWidget {
+  const RemoveTaskButton({
+    super.key,
+    required this.ref,
+    required this.list,
+    required this.index,
+  });
+
+  final WidgetRef ref;
+  final List<Task> list;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.delete),
+      onPressed: () {
+        ref.read(taskListDisplayProvider.notifier).removeTask(list[index].id);
+      },
+    );
+  }
+}
+
+class EndTaskButton extends StatelessWidget {
+  const EndTaskButton({
+    super.key,
+    required this.ref,
+    required this.index,
+  });
+
+  final WidgetRef ref;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.check),
+      onPressed: () {
+        ref.read(taskListDisplayProvider.notifier).endTask(index);
+      },
     );
   }
 }
