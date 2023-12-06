@@ -10,6 +10,9 @@ using :
 # How to use
 
 ```flutter pub get```
+
 ```flutter build```
+
 ```dart run build_runner watch```
+
 ```flutter run```
