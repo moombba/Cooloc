@@ -1,29 +1,11 @@
 import 'package:afgf_front/models/task/task.dart';
 import 'package:afgf_front/providers/task_provider.dart';
 import 'package:afgf_front/theme/colors.dart';
-import 'package:afgf_front/widgets/pop_up_content.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart'; 
 
-class TasksPage extends ConsumerWidget {
+class TasksPage extends HookConsumerWidget {
   const TasksPage({super.key});
-
-  void showBottomPopup(BuildContext context) {
-    List<int> month = List.generate(13, (index) => index);
-    List<DropdownMenuItem<int>> items = month
-        .map((e) => DropdownMenuItem<int>(value: e, child: Text(e.toString())))
-        .toList();
-    List<int> day = List.generate(31, (index) => index);
-    List<DropdownMenuItem<int>> dayItems = day
-        .map((e) => DropdownMenuItem<int>(value: e, child: Text(e.toString())))
-        .toList();
-
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return PopUpContent(items: items, dayItems: dayItems);
-        });
-  }
 
   @override
   Widget build(BuildContext context, ref) {

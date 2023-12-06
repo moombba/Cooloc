@@ -2,8 +2,6 @@ import 'package:afgf_front/pages/profile_page.dart';
 import 'package:afgf_front/theme/colors.dart';
 import 'package:flutter/material.dart';
 
-
-
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -17,6 +15,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 }
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
@@ -28,7 +27,16 @@ class MyDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          SizedBox(height: MediaQuery.of(context).size.height * 0.1, child: const Align(alignment: Alignment(-0.845, 1.0),child: Text("Cooloc", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: pink),)),),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.1,
+            child: const Align(
+                alignment: Alignment(-0.845, 1.0),
+                child: Text(
+                  "Cooloc",
+                  style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w700, color: pink),
+                )),
+          ),
           ListTile(
             leading: const Icon(Icons.account_circle),
             title: const Text('Profile'),

@@ -1,29 +1,29 @@
-import 'package:afgf_front/providers/task_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PopUpContent extends StatefulWidget {
-  PopUpContent({
-    super.key,
+import 'package:afgf_front/providers/task_provider.dart';
+
+class PopUpContent extends HookWidget {
+  final List<DropdownMenuItem<int>> items;
+  final List<DropdownMenuItem<int>> dayItems;
+
+  const PopUpContent({
+    super.key, 
     required this.items,
     required this.dayItems,
   });
 
-  final TextEditingController _textFieldController = TextEditingController();
-  final List<DropdownMenuItem<int>> items;
-  final List<DropdownMenuItem<int>> dayItems;
-
-  @override
-  State<PopUpContent> createState() => _PopUpContentState();
-}
-
-class _PopUpContentState extends State<PopUpContent> {
-  int monthValue = 0;
-  int dayValue = 0;
-  double _sliderValue = 1.0;
 
   @override
   Widget build(BuildContext context) {
+
+  final  textFieldController = useState(TextEditingController());
+  final monthValue = useState(1);
+  final dayValue = useState(1);
+  final sliderValue = useState(1.0);
+
+
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.5,
       child: Padding(
@@ -34,9 +34,9 @@ class _PopUpContentState extends State<PopUpContent> {
           children: <Widget>[
             TextField(
               onChanged: (value) {
-                setState(() {});
+                // setState(() {});
               },
-              controller: widget._textFieldController,
+              controller: textFieldController.value,
               decoration: const InputDecoration(
                 labelText: 'Nom de la tâche',
               ),
@@ -45,18 +45,18 @@ class _PopUpContentState extends State<PopUpContent> {
               children: [
                 const Text("Poids de la tâche"),
                 Slider(
-                  value: _sliderValue,
+                  value: sliderValue.value,
                   min: 1.0,
                   max: 3.0,
                   divisions: 2,
                   label: "Poids",
                   onChanged: (double value) {
-                    setState(() {
-                      _sliderValue = value;
-                    });
+
+                      sliderValue.value = value;
+
                   },
                 ),
-                Text(_sliderValue.toInt().toString(),
+                Text(sliderValue.value.toInt().toString(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
@@ -71,13 +71,13 @@ class _PopUpContentState extends State<PopUpContent> {
                   children: [
                     const Text("Mois"),
                     DropdownButton(
-                      items: widget.items,
+                      items: items,
                       onChanged: (value) {
-                        setState(() {
-                          monthValue = value!;
-                        });
+
+                          monthValue.value = value!;
+
                       },
-                      value: monthValue,
+                      value: monthValue.value,
                     ),
                   ],
                 ),
@@ -85,13 +85,13 @@ class _PopUpContentState extends State<PopUpContent> {
                   children: [
                     const Text("Jour"),
                     DropdownButton(
-                      items: widget.dayItems,
+                      items: dayItems,
                       onChanged: (value) {
-                        setState(() {
-                          dayValue = value!;
-                        });
+
+                          dayValue.value = value!;
+
                       },
-                      value: dayValue,
+                      value: dayValue.value,
                     ),
                   ],
                 ),
@@ -100,16 +100,16 @@ class _PopUpContentState extends State<PopUpContent> {
             Consumer(builder: (context, ref, child) {
               ref.watch(taskListDisplayProvider.notifier);
               return ElevatedButton(
-                onPressed: widget._textFieldController.text.isNotEmpty &&
-                        (monthValue != 0 || dayValue != 0)
+                onPressed: textFieldController.value.text.isNotEmpty &&
+                        (monthValue.value != 0 || dayValue.value != 0 )
                     ? () {
                         ref
                             .read(taskListDisplayProvider.notifier)
-                            .addTask(name: widget._textFieldController.text,
-                            weight: _sliderValue.toInt(),
+                            .addTask(name: textFieldController.value.text,
+                            weight: sliderValue.value.toInt(),
                             recurrence: Duration.zero,);
                         Navigator.of(context).pop();
-                        widget._textFieldController.text = "";
+                        textFieldController.value.text = "";
                       }
                     : null,
                 child: const Text('Ajouter'),
