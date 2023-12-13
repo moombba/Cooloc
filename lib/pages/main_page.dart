@@ -1,3 +1,5 @@
+import 'package:afgf_front/pages/groceries_page.dart';
+import 'package:afgf_front/pages/notification_page.dart';
 import 'package:afgf_front/pages/tasks_page.dart';
 import 'package:afgf_front/theme/colors.dart';
 import 'package:afgf_front/widgets/drawer.dart';
@@ -56,9 +58,8 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _children = [
     const TasksPage(),
-    const ViewPage('Page 2'),
+    const GroceriesPage(),
     const ViewPage('Page 3'),
-    const ViewPage('Page 4'),
   ];
 
   void onTabTapped(int index) {
@@ -95,16 +96,21 @@ class _MainPageState extends State<MainPage> {
           selectedColor: Theme.of(context).primaryColor,
         ),
 
-        /// Profile
-        SalomonBottomBarItem(
-          icon: const Icon(Icons.calendar_month),
-          title: const Text("Profile"),
-          selectedColor: Theme.of(context).primaryColor       ),
       ],
     );
 
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.notifications),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const NotificationPage()),
+                );
+              },
+            ),],
         ),
         drawer: const MyDrawer(),
         body: _children[_currentIndex],

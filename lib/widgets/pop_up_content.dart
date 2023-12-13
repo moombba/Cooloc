@@ -9,20 +9,17 @@ class PopUpContent extends HookWidget {
   final List<DropdownMenuItem<int>> dayItems;
 
   const PopUpContent({
-    super.key, 
+    super.key,
     required this.items,
     required this.dayItems,
   });
 
-
   @override
   Widget build(BuildContext context) {
-
-  final  textFieldController = useState(TextEditingController());
-  final monthValue = useState(1);
-  final dayValue = useState(1);
-  final sliderValue = useState(1.0);
-
+    final textFieldController = useState(TextEditingController());
+    final monthValue = useState(1);
+    final dayValue = useState(1);
+    final sliderValue = useState(1.0);
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.5,
@@ -33,9 +30,6 @@ class PopUpContent extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             TextField(
-              onChanged: (value) {
-                // setState(() {});
-              },
               controller: textFieldController.value,
               decoration: const InputDecoration(
                 labelText: 'Nom de la tâche',
@@ -51,9 +45,7 @@ class PopUpContent extends HookWidget {
                   divisions: 2,
                   label: "Poids",
                   onChanged: (double value) {
-
-                      sliderValue.value = value;
-
+                    sliderValue.value = value;
                   },
                 ),
                 Text(sliderValue.value.toInt().toString(),
@@ -73,9 +65,7 @@ class PopUpContent extends HookWidget {
                     DropdownButton(
                       items: items,
                       onChanged: (value) {
-
-                          monthValue.value = value!;
-
+                        monthValue.value = value!;
                       },
                       value: monthValue.value,
                     ),
@@ -87,9 +77,7 @@ class PopUpContent extends HookWidget {
                     DropdownButton(
                       items: dayItems,
                       onChanged: (value) {
-
-                          dayValue.value = value!;
-
+                        dayValue.value = value!;
                       },
                       value: dayValue.value,
                     ),
@@ -101,13 +89,13 @@ class PopUpContent extends HookWidget {
               ref.watch(taskListDisplayProvider.notifier);
               return ElevatedButton(
                 onPressed: textFieldController.value.text.isNotEmpty &&
-                        (monthValue.value != 0 || dayValue.value != 0 )
+                        (monthValue.value != 0 || dayValue.value != 0)
                     ? () {
-                        ref
-                            .read(taskListDisplayProvider.notifier)
-                            .addTask(name: textFieldController.value.text,
-                            weight: sliderValue.value.toInt(),
-                            recurrence: Duration.zero,);
+                        ref.read(taskListDisplayProvider.notifier).addTask(
+                              name: textFieldController.value.text,
+                              weight: sliderValue.value.toInt(),
+                              recurrence: Duration.zero,
+                            );
                         Navigator.of(context).pop();
                         textFieldController.value.text = "";
                       }

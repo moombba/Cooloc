@@ -1,6 +1,6 @@
 import 'package:afgf_front/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../models/person/person.dart';
 import '../providers/profile_provider.dart';
@@ -37,7 +37,7 @@ class ProfilePage extends ConsumerWidget {
               SizedBox(height: MediaQuery.of(context).size.height * 0.025),
               Row(children: [
                 SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                Text("Mes badges", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+                const Text("Mes badges", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
               ]),
 
 

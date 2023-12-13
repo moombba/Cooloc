@@ -7,8 +7,7 @@ part "task_provider.g.dart";
 @riverpod
 class TaskListDisplay extends _$TaskListDisplay {
   @override
-  List<Task> build() =>
-      [Task(id: DateTime.now().toString(),name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
+  List<Task> build() =>[Task(id: DateTime.now().toString(),name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
 
   String _formatTaskName(String name) => "${name[0].toUpperCase()}${name.substring(1)}";
 
