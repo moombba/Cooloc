@@ -20,10 +20,9 @@ Event _$EventFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Event {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  bool get isDone => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,12 +35,7 @@ abstract class $EventCopyWith<$Res> {
   factory $EventCopyWith(Event value, $Res Function(Event) then) =
       _$EventCopyWithImpl<$Res, Event>;
   @useResult
-  $Res call(
-      {String id,
-      String title,
-      String description,
-      bool isDone,
-      DateTime date});
+  $Res call({int id, String title, String description, DateTime date});
 }
 
 /// @nodoc
@@ -60,14 +54,13 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
     Object? id = null,
     Object? title = null,
     Object? description = null,
-    Object? isDone = null,
     Object? date = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -76,10 +69,6 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      isDone: null == isDone
-          ? _value.isDone
-          : isDone // ignore: cast_nullable_to_non_nullable
-              as bool,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -95,12 +84,7 @@ abstract class _$$EventImplCopyWith<$Res> implements $EventCopyWith<$Res> {
       __$$EventImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String title,
-      String description,
-      bool isDone,
-      DateTime date});
+  $Res call({int id, String title, String description, DateTime date});
 }
 
 /// @nodoc
@@ -117,14 +101,13 @@ class __$$EventImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? description = null,
-    Object? isDone = null,
     Object? date = null,
   }) {
     return _then(_$EventImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -133,10 +116,6 @@ class __$$EventImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      isDone: null == isDone
-          ? _value.isDone
-          : isDone // ignore: cast_nullable_to_non_nullable
-              as bool,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -152,7 +131,6 @@ class _$EventImpl extends _Event {
       {required this.id,
       required this.title,
       required this.description,
-      required this.isDone,
       required this.date})
       : super._();
 
@@ -160,19 +138,17 @@ class _$EventImpl extends _Event {
       _$$EventImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String title;
   @override
   final String description;
   @override
-  final bool isDone;
-  @override
   final DateTime date;
 
   @override
   String toString() {
-    return 'Event(id: $id, title: $title, description: $description, isDone: $isDone, date: $date)';
+    return 'Event(id: $id, title: $title, description: $description, date: $date)';
   }
 
   @override
@@ -184,14 +160,12 @@ class _$EventImpl extends _Event {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.isDone, isDone) || other.isDone == isDone) &&
             (identical(other.date, date) || other.date == date));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, description, isDone, date);
+  int get hashCode => Object.hash(runtimeType, id, title, description, date);
 
   @JsonKey(ignore: true)
   @override
@@ -209,23 +183,20 @@ class _$EventImpl extends _Event {
 
 abstract class _Event extends Event {
   factory _Event(
-      {required final String id,
+      {required final int id,
       required final String title,
       required final String description,
-      required final bool isDone,
       required final DateTime date}) = _$EventImpl;
   _Event._() : super._();
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$EventImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get title;
   @override
   String get description;
-  @override
-  bool get isDone;
   @override
   DateTime get date;
   @override

@@ -8,10 +8,9 @@ class Event with _$Event {
   const Event._();
 
   factory Event({
-    required String id,
+    required int id,
     required String title,
     required String description,
-    required bool isDone,
     required DateTime date,
   }) = _Event;
 
