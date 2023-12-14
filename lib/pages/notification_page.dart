@@ -20,19 +20,33 @@ class NotificationPage extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text("Feed"),
       ),
-      body:  Column(
-        children: [
-          Expanded(
-            child: ListView.builder(itemCount: 1, itemBuilder: (context, index) {
-              return NotificationElem(event: Event(
-              id: index,
-              title: "Test",
-              description: "Test",
-              date: DateTime.now()));
-            }),
+      body:  SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+  child: ListView.builder(
+    itemCount: 4,
+    itemBuilder: (context, index) {
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.3, // 50% of screen height
+        width: MediaQuery.of(context).size.width * 0.4, // 100% of screen width
+        child: NotificationElem(
+          event: Event(
+            id: index,
+            title: "Oui",
+            description: "Test",
+            date: DateTime.now(),
           ),
-        ],
-    ));
+        ),
+      );
+    },
+  ),
+),
+          ],
+          ),
+      ));
   }
 
 }
