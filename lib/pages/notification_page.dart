@@ -29,7 +29,7 @@ class NotificationPage extends HookConsumerWidget {
   child: ListView.builder(
     itemCount: 4,
     itemBuilder: (context, index) {
-      return Container(
+      return SizedBox(
         height: MediaQuery.of(context).size.height * 0.3, // 50% of screen height
         width: MediaQuery.of(context).size.width * 0.4, // 100% of screen width
         child: NotificationElem(
