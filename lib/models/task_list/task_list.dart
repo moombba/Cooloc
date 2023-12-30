@@ -1,4 +1,4 @@
-import 'package:afgf_front/models/task/task.dart';
+import 'package:cooloc/models/task/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task_list.g.dart';

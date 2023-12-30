@@ -1,4 +1,4 @@
-import 'package:afgf_front/models/task/task.dart';
+import 'package:cooloc/models/task/task.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part "task_provider.g.dart";

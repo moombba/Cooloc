@@ -1,9 +1,9 @@
-import 'package:afgf_front/pages/groceries_page.dart';
-import 'package:afgf_front/pages/notification_page.dart';
-import 'package:afgf_front/pages/tasks_page.dart';
-import 'package:afgf_front/theme/colors.dart';
-import 'package:afgf_front/widgets/drawer.dart';
-import 'package:afgf_front/widgets/pop_up_content.dart';
+import 'package:cooloc/pages/groceries_page.dart';
+import 'package:cooloc/pages/notification_page.dart';
+import 'package:cooloc/pages/tasks_page.dart';
+import 'package:cooloc/theme/colors.dart';
+import 'package:cooloc/widgets/drawer.dart';
+import 'package:cooloc/widgets/pop_up_content.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 

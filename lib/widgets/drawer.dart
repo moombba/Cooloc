@@ -1,5 +1,5 @@
-import 'package:afgf_front/pages/profile_page.dart';
-import 'package:afgf_front/theme/colors.dart';
+import 'package:cooloc/pages/profile_page.dart';
+import 'package:cooloc/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {

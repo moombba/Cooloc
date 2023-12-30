@@ -1,6 +1,6 @@
-import 'package:afgf_front/models/task/task.dart';
-import 'package:afgf_front/providers/task_provider.dart';
-import 'package:afgf_front/theme/colors.dart';
+import 'package:cooloc/models/task/task.dart';
+import 'package:cooloc/providers/task_provider.dart';
+import 'package:cooloc/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart'; 
 

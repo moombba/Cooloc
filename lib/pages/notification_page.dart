@@ -1,5 +1,5 @@
-import 'package:afgf_front/models/event/event.dart';
-import 'package:afgf_front/widgets/notification_elem.dart';
+import 'package:cooloc/models/event/event.dart';
+import 'package:cooloc/widgets/notification_elem.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
