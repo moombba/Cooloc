@@ -34,7 +34,7 @@ class NotificationElem extends StatelessWidget {
                       child: const Text('Voir évenement')),
                   Text(
                     event.date.toString(),
-                    style: TextStyle(fontSize: 13),
+                    style: const TextStyle(fontSize: 13),
                   )
                 ]),
           ),
