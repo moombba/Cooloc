@@ -3,13 +3,21 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part "task_provider.g.dart";
 
-
 @riverpod
 class TaskListDisplay extends _$TaskListDisplay {
   @override
-  List<Task> build() =>[Task(id: DateTime.now().toString(),name: "name", weight: 1, recurrence: Duration.zero, isDone: false)];
+  List<Task> build() => [
+        Task(
+          // id: DateTime.now().toString(),
+          name: "name",
+          weight: 1,
+          // recurrence: Duration.zero,
+          isDone: false,
+        )
+      ];
 
-  String _formatTaskName(String name) => "${name[0].toUpperCase()}${name.substring(1)}";
+  String _formatTaskName(String name) =>
+      "${name[0].toUpperCase()}${name.substring(1)}";
 
   void addTask({
     required String name,
@@ -17,10 +25,10 @@ class TaskListDisplay extends _$TaskListDisplay {
     required Duration recurrence,
   }) {
     var task = Task(
-      id: DateTime.now().toString(),
+      // id: DateTime.now().toString(),
       name: _formatTaskName(name),
       weight: weight,
-      recurrence: recurrence,
+      // recurrence: recurrence,
       isDone: false,
     );
     state = [...state, task];
@@ -28,7 +36,7 @@ class TaskListDisplay extends _$TaskListDisplay {
 
   void removeTask(String id) {
     List<Task> newState = [...state];
-    newState.removeWhere((element) => element.id == id);
+    // newState.removeWhere((element) => element.id == id);
     state = newState;
   }
 

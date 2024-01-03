@@ -117,7 +117,7 @@ class RemoveTaskButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.delete),
       onPressed: () {
-        ref.read(taskListDisplayProvider.notifier).removeTask(list[index].id);
+        // ref.read(taskListDisplayProvider.notifier).removeTask(list[index].id);
       },
     );
   }

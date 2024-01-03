@@ -11,12 +11,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  var env = DotEnv(includePlatformEnvironment: true)..load();
+  // var env = DotEnv(includePlatformEnvironment: true)..load();
 
-  await Supabase.initialize(
-    url: env['supabaseUrl']!,
-    anonKey: env['supabaseAnonKey']!,
-  );
+  // // await Supabase.initialize(
+  // //   url: env['supabaseUrl']!,
+  // //   anonKey: env['supabaseAnonKey']!,
+  // // );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
      runApp(const ProviderScope(child: MyApp()));
   });

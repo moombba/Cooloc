@@ -1,3 +1,4 @@
+import 'package:cooloc/data/connect_to_api.dart';
 import 'package:cooloc/pages/groceries_page.dart';
 import 'package:cooloc/pages/notification_page.dart';
 import 'package:cooloc/pages/tasks_page.dart';
@@ -16,6 +17,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
+  NetworkLayer networkLayer = NetworkLayer();
 
 
 
@@ -48,9 +50,11 @@ class _MainPageState extends State<MainPage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
-      FloatingActionButton(onPressed: () {}, child: const Icon(Icons.remove)),
+      FloatingActionButton(onPressed: () {
+        networkLayer.setAction(GetAction());
+        networkLayer.doStuff();
+      }, child: const Icon(Icons.remove)),
       FloatingActionButton(onPressed: () {}, child: const Icon(Icons.refresh)),
-      FloatingActionButton(onPressed: () {}, child: const Icon(Icons.search)),
     ];
 
     return fabs[_currentIndex];
