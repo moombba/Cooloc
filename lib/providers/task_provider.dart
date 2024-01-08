@@ -41,7 +41,10 @@ class TaskListDisplay extends _$TaskListDisplay {
     state = newState;
   }
 
-  List<Task> getTaskList() {
-    return state;
+   getTaskList() async {
+    networkLayer.setAction(GetAction());
+    var data = networkLayer.doStuff();
+
+    state =  data;
   }
 }

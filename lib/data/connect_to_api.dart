@@ -15,7 +15,7 @@ class GetAction implements NetworkAction {
   doStuf(http.Client client ) async {
 
     var otherClient = http.Client();
-    var res = await otherClient.get(Uri.parse('https://e7aa-2a01-e0a-984-b0a0-54fe-5bb5-b047-970b.ngrok-free.app/tasks'));
+    var res = await otherClient.get(Uri.parse('https://f07a-2a01-cb14-850-6700-60b6-207f-9f3-a464.ngrok-free.app//tasks'));
 
     var body = jsonDecode(res.body);
     if (body.length > 0) {

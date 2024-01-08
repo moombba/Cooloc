@@ -6,19 +6,14 @@ import 'package:cooloc/theme/colors.dart';
 import 'package:cooloc/widgets/drawer.dart';
 import 'package:cooloc/widgets/pop_up_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
 
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  int _currentIndex = 0;
-  NetworkLayer networkLayer = NetworkLayer();
-
+class MainPage extends HookWidget{
+  MainPage({super.key});
+  final NetworkLayer networkLayer = NetworkLayer();
+  late ValueNotifier<int> _currentIndex;
 
 
   void showBottomPopup(BuildContext context) {
@@ -51,13 +46,12 @@ class _MainPageState extends State<MainPage> {
         child: const Icon(Icons.add),
       ),
       FloatingActionButton(onPressed: () {
-        networkLayer.setAction(GetAction());
-        networkLayer.doStuff();
+        
       }, child: const Icon(Icons.remove)),
       FloatingActionButton(onPressed: () {}, child: const Icon(Icons.refresh)),
     ];
 
-    return fabs[_currentIndex];
+    return fabs[_currentIndex.value];
   }
 
   final List<Widget> _children = [
@@ -66,18 +60,18 @@ class _MainPageState extends State<MainPage> {
     const ViewPage('Page 3'),
   ];
 
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+  void onTabTapped(int index) =>
+      _currentIndex.value = index;
 
   @override
   Widget build(BuildContext context) {
+
+  _currentIndex = useState(0);
+
     var navigationBar = SalomonBottomBar(
       backgroundColor: backgroundColor,
-      currentIndex: _currentIndex,
-      onTap: (i) => setState(() => _currentIndex = i),
+      currentIndex: _currentIndex.value,
+      onTap: (i) =>  _currentIndex.value = i,
       items: [
         /// Home
         SalomonBottomBarItem(
@@ -117,7 +111,7 @@ class _MainPageState extends State<MainPage> {
             ),],
         ),
         drawer: const MyDrawer(),
-        body: _children[_currentIndex],
+        body: _children[_currentIndex.value],
         floatingActionButton: getFab(context),
         bottomNavigationBar: navigationBar);
   }
