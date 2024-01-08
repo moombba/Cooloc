@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 abstract class NetworkAction {
 
   NetworkAction();
-  doStuf(http.Client client);
+  Future<dynamic> doStuf(http.Client client);
 }
 
 class GetAction implements NetworkAction {
@@ -19,13 +19,11 @@ class GetAction implements NetworkAction {
 
     var body = jsonDecode(res.body);
     if (body.length > 0) {
-      log("body is not empty");
+      List<Task> tasks = body.map((e) => Task.fromJson(e)).toList();
+      return tasks;
     }
-    else {
-      Task task = Task.fromJson(body[0]);
-      log(task.name);}
 
-    log(body.toString());
+    throw Exception("Error getting tasks");
 }
 
 }

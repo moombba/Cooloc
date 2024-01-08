@@ -1,20 +1,19 @@
+import 'package:cooloc/data/connect_to_api.dart';
 import 'package:cooloc/models/task/task.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part "task_provider.g.dart";
 
+
+
 @riverpod
 class TaskListDisplay extends _$TaskListDisplay {
+
+  var networkLayer = NetworkLayer();
+
   @override
-  List<Task> build() => [
-        Task(
-          // id: DateTime.now().toString(),
-          name: "name",
-          weight: 1,
-          // recurrence: Duration.zero,
-          isDone: false,
-        )
-      ];
+  List<Task> build() => [];
+
 
   String _formatTaskName(String name) =>
       "${name[0].toUpperCase()}${name.substring(1)}";
