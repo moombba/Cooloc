@@ -2,18 +2,19 @@ import 'package:cooloc/data/connect_to_api.dart';
 import 'package:cooloc/pages/groceries_page.dart';
 import 'package:cooloc/pages/notification_page.dart';
 import 'package:cooloc/pages/tasks_page.dart';
+import 'package:cooloc/providers/task_provider.dart';
 import 'package:cooloc/theme/colors.dart';
 import 'package:cooloc/widgets/drawer.dart';
 import 'package:cooloc/widgets/pop_up_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 
-class MainPage extends HookWidget{
+class MainPage extends HookConsumerWidget{
   MainPage({super.key});
   final NetworkLayer networkLayer = NetworkLayer();
-  late ValueNotifier<int> _currentIndex;
 
 
   void showBottomPopup(BuildContext context) {
@@ -36,7 +37,7 @@ class MainPage extends HookWidget{
   }
 
 
-  FloatingActionButton getFab(BuildContext context) {
+  FloatingActionButton getFab(BuildContext context, ref, currentIndex) {
     final List<FloatingActionButton> fabs = [
       FloatingActionButton(
         onPressed: () {
@@ -46,12 +47,12 @@ class MainPage extends HookWidget{
         child: const Icon(Icons.add),
       ),
       FloatingActionButton(onPressed: () {
-        
+        ref.watch(taskListDisplayProvider.notifier).getTaskList();
       }, child: const Icon(Icons.remove)),
       FloatingActionButton(onPressed: () {}, child: const Icon(Icons.refresh)),
     ];
 
-    return fabs[_currentIndex.value];
+    return fabs[currentIndex.value];
   }
 
   final List<Widget> _children = [
@@ -60,13 +61,10 @@ class MainPage extends HookWidget{
     const ViewPage('Page 3'),
   ];
 
-  void onTabTapped(int index) =>
-      _currentIndex.value = index;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
 
-  _currentIndex = useState(0);
+  var _currentIndex = useState(0);
 
     var navigationBar = SalomonBottomBar(
       backgroundColor: backgroundColor,
@@ -112,7 +110,7 @@ class MainPage extends HookWidget{
         ),
         drawer: const MyDrawer(),
         body: _children[_currentIndex.value],
-        floatingActionButton: getFab(context),
+        floatingActionButton: getFab(context, ref, _currentIndex),
         bottomNavigationBar: navigationBar);
   }
 }
