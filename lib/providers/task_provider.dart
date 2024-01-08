@@ -4,16 +4,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part "task_provider.g.dart";
 
-
-
 @riverpod
 class TaskListDisplay extends _$TaskListDisplay {
-
   var networkLayer = NetworkLayer();
 
   @override
   List<Task> build() => [];
-
 
   String _formatTaskName(String name) =>
       "${name[0].toUpperCase()}${name.substring(1)}";
