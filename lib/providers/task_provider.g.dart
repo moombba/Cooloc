@@ -6,7 +6,21 @@ part of 'task_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskListDisplayHash() => r'906cb6ac2c3665cc5383396744a47ca83f9a9ec6';
+String _$getTasksHash() => r'e052ab353359031a178e899392bbceae1b1cefd4';
+
+/// See also [getTasks].
+@ProviderFor(getTasks)
+final getTasksProvider = AutoDisposeFutureProvider<List<Task>>.internal(
+  getTasks,
+  name: r'getTasksProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$getTasksHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetTasksRef = AutoDisposeFutureProviderRef<List<Task>>;
+String _$taskListDisplayHash() => r'2c12817f56e1fb1189440465dbde1dc593a7bc2e';
 
 /// See also [TaskListDisplay].
 @ProviderFor(TaskListDisplay)

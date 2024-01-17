@@ -48,3 +48,14 @@ class TaskListDisplay extends _$TaskListDisplay {
     state =  data;
   }
 }
+
+@riverpod
+Future<List<Task>> getTasks(ref) async {
+  var networkLayer = NetworkLayer();
+    networkLayer.setAction(GetAction());
+    List<Task> data = await networkLayer.doStuff();
+
+    return data;
+}
+
+

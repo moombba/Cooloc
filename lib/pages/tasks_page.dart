@@ -2,43 +2,50 @@ import 'package:cooloc/models/task/task.dart';
 import 'package:cooloc/providers/task_provider.dart';
 import 'package:cooloc/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart'; 
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TasksPage extends HookConsumerWidget {
+class TasksPage extends ConsumerWidget {
   const TasksPage({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
-    var list = ref.watch(taskListDisplayProvider);
 
-    var doneList = list.where((element) => element.isDone).toList();
-    var toDoList = list.where((element) => !element.isDone).toList();
+    var tasks = ref.watch(getTasksProvider);
 
-    print(list);
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.05),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                  itemCount: toDoList.length,
-                  itemBuilder: (context, index) {
-                    return TaskCard(list: toDoList, index: index, ref: ref);
-                  }),
-            ),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: list.where((element) => element.isDone).length,
-                  itemBuilder: (context, index) {
-                    return TaskCard(list: doneList, index: index, ref: ref);
-                  }),
-            )
-          ],
+        child: tasks.when(
+          data: (data) => _buildList(data, ref),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error, stack) => Text(error.toString()),
         ),
       ),
+    );
+  }
+
+  Column _buildList(List<Task> data, WidgetRef ref) {
+    var doneList = data.where((element) => element.isDone).toList();
+    var toDoList = data.where((element) => !element.isDone).toList();
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+              itemCount: toDoList.length,
+              itemBuilder: (context, index) {
+                return TaskCard(list: toDoList, index: index, ref: ref);
+              }),
+        ),
+        Expanded(
+          child: ListView.builder(
+              itemCount: doneList.length,
+              itemBuilder: (context, index) {
+                return TaskCard(list: doneList, index: index, ref: ref);
+              }),
+        )
+      ],
     );
   }
 }

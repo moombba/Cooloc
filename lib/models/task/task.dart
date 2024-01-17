@@ -16,5 +16,11 @@ class Task with _$Task {
     required bool isDone,
   }) = _Task;
 
-  factory Task.fromJson(Map<String, dynamic> json ) => _$TaskFromJson(json);
+  factory Task.fromJson(Map<String, String> json ) => _$TaskFromJson(json);
+
+    Map<String, String> toJ() => <String, String>{
+        'name': name,
+        'weight': weight.toString(),
+        'isDone': isDone.toString(),
+      };
 }
