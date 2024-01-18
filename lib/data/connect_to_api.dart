@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:developer';
@@ -11,7 +13,7 @@ abstract class NetworkAction {
 }
 
 String urlBuilder =
-    "https://ee0d-2a01-e0a-984-b0a0-6c9c-370e-e27f-5662.ngrok-free.app";
+    "https://708c-176-144-18-100.ngrok-free.app";
 
 class GetAction implements NetworkAction {
   @override
@@ -32,10 +34,14 @@ class GetAction implements NetworkAction {
 
 class PostAction implements NetworkAction {
   @override
-  doStuf(http.Client client, [Task? newTask]) async {
+  Future<void> doStuf(http.Client client, [Task? newTask]) async {
     Map<String, String> body = newTask!.toJ() ;
-    print(body);
-    var res = await client.post(Uri.parse('https://ee0d-2a01-e0a-984-b0a0-6c9c-370e-e27f-5662.ngrok-free.app/tasks'), body: body);
+    print("body => $body");
+    var res = await client.post(Uri.parse('$urlBuilder/tasks'), body: jsonEncode({
+        "name": "popo",
+        "weight": 1,
+        "isDone": false
+      }));
 
     var resBody = jsonDecode(res.body);
     print(resBody);
