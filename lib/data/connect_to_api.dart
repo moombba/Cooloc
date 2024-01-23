@@ -13,7 +13,7 @@ abstract class NetworkAction {
 }
 
 String urlBuilder =
-    "https://708c-176-144-18-100.ngrok-free.app";
+    "https://ba88-2a02-8440-5240-d317-4031-1f8a-40e5-bd0.ngrok-free.app";
 
 class GetAction implements NetworkAction {
   @override
@@ -23,8 +23,8 @@ class GetAction implements NetworkAction {
 
       var body = jsonDecode(res.body);
       print(body);
-      var tasks = body.map<Task>((e) => Task.fromJson(e)).toList();
-      return tasks as List<Task>;
+      List<Task> tasks = body.map<Task>((e) => Task.fromJson(e)).toList();
+      return tasks;
     } on Exception catch (e) {
       log("an http error occured ${e.toString()}");
       rethrow;
@@ -38,9 +38,7 @@ class PostAction implements NetworkAction {
     Map<String, String> body = newTask!.toJ() ;
     print("body => $body");
     var res = await client.post(Uri.parse('$urlBuilder/tasks'), body: jsonEncode({
-        "name": "popo",
-        "weight": 1,
-        "isDone": false
+      newTask.toJson()
       }));
 
     var resBody = jsonDecode(res.body);

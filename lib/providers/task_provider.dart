@@ -54,7 +54,7 @@ Future<List<Task>> getTasks(ref) async {
   var networkLayer = NetworkLayer();
     networkLayer.setAction(GetAction());
     List<Task> data = await networkLayer.doStuff();
-
+    print("data = $data");
     return data;
 }
 

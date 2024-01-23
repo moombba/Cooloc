@@ -9,7 +9,7 @@ part of 'task_list.dart';
 _$TaskListImpl _$$TaskListImplFromJson(Map<String, dynamic> json) =>
     _$TaskListImpl(
       list: (json['list'] as List<dynamic>)
-          .map((e) => Task.fromJson(Map<String, String>.from(e as Map)))
+          .map((e) => Task.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
