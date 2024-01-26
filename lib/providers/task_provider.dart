@@ -14,24 +14,19 @@ class TaskListDisplay extends _$TaskListDisplay {
   String _formatTaskName(String name) =>
       "${name[0].toUpperCase()}${name.substring(1)}";
 
+
   void addTask({
-    required String name,
-    required int weight,
-    required Duration recurrence,
-  }) {
-    var task = Task(
-      // id: DateTime.now().toString(),
-      name: _formatTaskName(name),
-      weight: weight,
-      // recurrence: recurrence,
-      isDone: false,
-    );
-    state = [...state, task];
+    required Task task
+  }) async {
+
+    networkLayer.setAction(PostAction());
+    await networkLayer.doStuff();
+    await getTaskList();
   }
 
   void removeTask(String id) {
     List<Task> newState = [...state];
-    // newState.removeWhere((element) => element.id == id);
+
     state = newState;
   }
 
@@ -41,21 +36,18 @@ class TaskListDisplay extends _$TaskListDisplay {
     state = newState;
   }
 
-   getTaskList() async {
+  getTaskList() async {
     networkLayer.setAction(GetAction());
     var data = await networkLayer.doStuff();
-
-    state =  data;
+    state = data;
   }
 }
 
 @riverpod
 Future<List<Task>> getTasks(ref) async {
   var networkLayer = NetworkLayer();
-    networkLayer.setAction(GetAction());
-    List<Task> data = await networkLayer.doStuff();
-    print("data = $data");
-    return data;
+  networkLayer.setAction(GetAction());
+  List<Task> data = await networkLayer.doStuff();
+  print("data = $data");
+  return data;
 }
-
-

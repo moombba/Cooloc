@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "794322053165",
+    "project_id": "cooloc-ca26e",
+    "storage_bucket": "cooloc-ca26e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794322053165:android:bc48654b6332bbbe2e70a4",
+        "android_client_info": {
+          "package_name": "com.cooloc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFBO_EnXgJ8NIZ-oq37cCdUS6w1ys_k_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794322053165:android:4d78abbab3edead42e70a4",
+        "android_client_info": {
+          "package_name": "com.example.gestion_colloc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFBO_EnXgJ8NIZ-oq37cCdUS6w1ys_k_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

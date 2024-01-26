@@ -13,7 +13,7 @@ abstract class NetworkAction {
 }
 
 String urlBuilder =
-    "https://ba88-2a02-8440-5240-d317-4031-1f8a-40e5-bd0.ngrok-free.app";
+    "https://102a-2001-861-205-23a0-8cfa-2b56-985a-621c.ngrok-free.app";
 
 class GetAction implements NetworkAction {
   @override
@@ -32,14 +32,16 @@ class GetAction implements NetworkAction {
   }
 }
 
+// fonction qui appelle les NetworkAction et fait la gestion d'erreur et autres gestion
+
 class PostAction implements NetworkAction {
   @override
   Future<void> doStuf(http.Client client, [Task? newTask]) async {
     Map<String, String> body = newTask!.toJ() ;
     print("body => $body");
-    var res = await client.post(Uri.parse('$urlBuilder/tasks'), body: jsonEncode({
+    var res = await client.post(Uri.parse('$urlBuilder/tasks'), body: jsonEncode(
       newTask.toJson()
-      }));
+      ));
 
     var resBody = jsonDecode(res.body);
     print(resBody);
@@ -53,16 +55,20 @@ class PutAction implements NetworkAction {
   }
 }
 
-class DeleteAction implements NetworkAction {
+class DeleteTaskAction implements NetworkAction {
   @override
-  doStuf(http.Client client, [Task? newTask]) {
-    throw UnimplementedError();
+  doStuf(http.Client client, [Task? task]) async {
+    var res = await  client.delete(Uri.parse('$urlBuilder/tasks/${task!.name}'));
+        var resBody =  jsonDecode(res.body);
+    print(resBody);
+    return resBody;
   }
 }
 
 class NetworkLayer {
   late NetworkAction _action;
   var client = http.Client();
+  
 
   NetworkLayer();
 
